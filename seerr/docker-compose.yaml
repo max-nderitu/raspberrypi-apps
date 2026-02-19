@@ -1,0 +1,22 @@
+services:
+  overseerr:
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: overseerr
+    init: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /srv/ssd1/config/overseerr:/app/config
+    ports:
+      - 5055:5055
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+    restart: unless-stopped
