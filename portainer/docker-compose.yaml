@@ -1,5 +1,6 @@
 services:
   portainer:
+    image: "portainer/portainer-ce:latest"
     labels:
       - com.centurylinklabs.watchtower.enable=true
     ports:
@@ -10,8 +11,6 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "portainer_data:/data"
-    image: "cr.portainer.io/portainer/portainer-ce:latest"
-
   watchtower:
     container_name: watchtower
     image: containrrr/watchtower
