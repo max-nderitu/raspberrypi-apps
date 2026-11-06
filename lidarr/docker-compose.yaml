@@ -1,0 +1,18 @@
+---
+services:
+  prowlarr:
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /srv/ssd1/config/lidarr:/config
+      - /srv/ssd1/SSD1/Music:/music
+      - /srv/ssd1/SSD1/Downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
